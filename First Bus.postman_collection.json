@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "214c1647-dd23-4f55-8d9e-b0cc1296f709",
+		"name": "First Bus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12210647"
+	},
+	"item": [
+		{
+			"name": "Bus",
+			"item": [
+				{
+					"name": "Get Nearby Stops",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://prod.mobileapi.firstbus.co.uk/api/v2/bus/stop/nearby?lat={{HOME_LAT}}&lng={{HOME_LON}}",
+							"protocol": "https",
+							"host": [
+								"prod",
+								"mobileapi",
+								"firstbus",
+								"co",
+								"uk"
+							],
+							"path": [
+								"api",
+								"v2",
+								"bus",
+								"stop",
+								"nearby"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "{{HOME_LAT}}"
+								},
+								{
+									"key": "lng",
+									"value": "{{HOME_LON}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stop Departures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://prod.mobileapi.firstbus.co.uk/api/v2/bus/stop/{{ATCO_ID}}/departure",
+							"protocol": "https",
+							"host": [
+								"prod",
+								"mobileapi",
+								"firstbus",
+								"co",
+								"uk"
+							],
+							"path": [
+								"api",
+								"v2",
+								"bus",
+								"stop",
+								"{{ATCO_ID}}",
+								"departure"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Route Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://prod.mobileapi.firstbus.co.uk/api/v2/route/search?origin={{ORIGIN}}&destination={{DESTINATION}}&departureTime={{Routing_DepartureTime}}",
+							"protocol": "https",
+							"host": [
+								"prod",
+								"mobileapi",
+								"firstbus",
+								"co",
+								"uk"
+							],
+							"path": [
+								"api",
+								"v2",
+								"route",
+								"search"
+							],
+							"query": [
+								{
+									"key": "origin",
+									"value": "{{ORIGIN}}"
+								},
+								{
+									"key": "destination",
+									"value": "{{DESTINATION}}"
+								},
+								{
+									"key": "departureTime",
+									"value": "{{Routing_DepartureTime}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Between Stop Line Geometry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"service-codes\" : [\r\n    \"{{PROVIDER_CODE}}:{{ROUTE_NUMBER}}\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://prod.mobileapi.firstbus.co.uk/api/v2/bus/service/geometry",
+							"protocol": "https",
+							"host": [
+								"prod",
+								"mobileapi",
+								"firstbus",
+								"co",
+								"uk"
+							],
+							"path": [
+								"api",
+								"v2",
+								"bus",
+								"service",
+								"geometry"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Travel",
+			"item": [
+				{
+					"name": "Get P2P Direction Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://prod.mobileapi.firstbus.co.uk/api/v2/route/search?origin={{ORIGIN}}&destination={{DESTINATION}}&departureTime={{Routing_DepartureTime}}",
+							"protocol": "https",
+							"host": [
+								"prod",
+								"mobileapi",
+								"firstbus",
+								"co",
+								"uk"
+							],
+							"path": [
+								"api",
+								"v2",
+								"route",
+								"search"
+							],
+							"query": [
+								{
+									"key": "origin",
+									"value": "{{ORIGIN}}"
+								},
+								{
+									"key": "destination",
+									"value": "{{DESTINATION}}"
+								},
+								{
+									"key": "departureTime",
+									"value": "{{Routing_DepartureTime}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "[Unknown] Get WS Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://prod.mobileapi.firstbus.co.uk/api/v2/bus/service/socketInfo",
+					"protocol": "https",
+					"host": [
+						"prod",
+						"mobileapi",
+						"firstbus",
+						"co",
+						"uk"
+					],
+					"path": [
+						"api",
+						"v2",
+						"bus",
+						"service",
+						"socketInfo"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "cb69538eb877372ae66023e65d1caf95bb63861c",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "X-App-Key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"",
+					"// get the current time in ISO, URL Encoded (2023-09-20)",
+					"",
+					"let currentDate = new Date().toISOString();",
+					"let encodedDate = encodeURIComponent(currentDate);",
+					"",
+					"pm.collectionVariables.set(\"Routing_DepartureTime\", encodedDate);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ATCO_ID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "Routing_DepartureTime",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
